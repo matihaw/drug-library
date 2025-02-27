@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: DrugLibrary
+  datasource:
+    url: ${DATABASE_URL}
+    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+
+server:
+  port: ${SERVER_PORT}
+
+csv:
+  configs:
+    drugs-import:
+      source: rpl
+      providers:
+        rpl:
+          url: "https://rejestry.ezdrowie.gov.pl/api/rpl/medicinal-products/public-pl-report/get-csv"
+          delimiter: ";"
+          linesToSkip: 1
+          columnNames:
+            - Identyfikator Produktu Leczniczego
+            - Nazwa Produktu Leczniczego
+            - Nazwa powszechnie stosowana
+            - Rodzaj preparatu
+            - Zakaz stosowania u zwierząt
+            - Nazwa poprzednia produktu
+            - Droga podania - Gatunek - Tkanka - Okres karencji
+            - Moc
+            - Postać farmaceutyczna
+            - Typ procedury
+            - Numer pozwolenia
+            - Ważność pozwolenia
+            - Kod ATC
+            - Podmiot odpowiedzialny
+            - Opakowanie
+            - Substancja czynna
+            - Nazwa wytwórcy
+            - Kraj wytwórcy
+            - Nazwa importera
+            - Kraj importera
+            - Nazwa wytwórcy/importera
+            - Kraj wytwórcy/importera
+            - Podmiot odpowiedzialny w kraju eksportu
+            - Kraj eksportu
+            - Podstawa prawna wniosku
+            - Ulotka
+            - Charakterystyka
+            - Etykieto-ulotka
+            - Ulotka importu równoległego
+            - Etykieto-ulotka importu równoległego
+            - Oznakowanie opakowań importu równoległego
+            - Materiały edukacyjne dla osoby wykonującej zawód medyczny
+            - Materiały edukacyjne dla pacjenta
+          filePath: src\main\resources\drug\data.csv
